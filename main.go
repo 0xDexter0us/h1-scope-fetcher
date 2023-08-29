@@ -89,6 +89,7 @@ func printCSVDescending(data []Data) {
 		fmt.Printf("%s\n", d.Attributes.AssetIdentifier)
 	}
 }
+func help() {}
 
 func main() {
 
@@ -98,26 +99,21 @@ func main() {
 	flag.BoolVar(&showHelp, "h", false, "Show help message")
 	flag.Parse()
 
-	if showHelp {
+	if showHelp || program == "" || username == "" || apiKey == "" {
 		asciiArt := `
- _     _                               __      _       _               
-| |__ / |  ___  ___ ___  _ __   ___   / _| ___| |_ ___| |__   ___ _ __ 
-| '_ \| | / __|/ __/ _ \| '_ \ / _ \ | |_ / _ \ __/ __| '_ \ / _ \ '__|
-| | | | | \__ \ (_| (_) | |_) |  __/ |  _|  __/ || (__| | | |  __/ |   
-|_| |_|_| |___/\___\___/| .__/ \___| |_|  \___|\__\___|_| |_|\___|_|   
-                        |_|                                            
-`
+		 _     _                               __      _       _               
+		| |__ / |  ___  ___ ___  _ __   ___   / _| ___| |_ ___| |__   ___ _ __ 
+		| '_ \| | / __|/ __/ _ \| '_ \ / _ \ | |_ / _ \ __/ __| '_ \ / _ \ '__|
+		| | | | | \__ \ (_| (_) | |_) |  __/ |  _|  __/ || (__| | | |  __/ |   
+		|_| |_|_| |___/\___\___/| .__/ \___| |_|  \___|\__\___|_| |_|\___|_|   
+								|_|                                            
+	`
 
 		fmt.Println(asciiArt)
 		fmt.Println("\"h1 scope fetcher\" is a tool to fetch all inscope assets of HackerOne programs for integration in your automation and hacking workflow.")
 		fmt.Println("\nUseage:\n \t h1scopefetcher [Flags]")
 		fmt.Println("Flags:\n \t -p\t\"Your Program Name\"\n \t -u\t\"HackerOne API username\"\n \t -k\t\"HackerOne API Key\"")
 
-		return
-	}
-
-	if program == "" || username == "" || apiKey == "" {
-		fmt.Println("Please provide program name, API username, and API key.\n Try -h for help.")
 		return
 	}
 
